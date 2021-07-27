@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IProduct } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   templateUrl: './product-detail.component.html',
@@ -6,8 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailComponent implements OnInit {
   pageTitle: string = 'Product Detail';
-  
-  constructor() {}
+  product: IProduct | undefined;
 
-  ngOnInit(): void {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService
+  ) {}
+
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.product = products.filter((x) => x.productId == id)[0];
+      },
+    });
+  }
+
+  onBack(): void {
+    this.router.navigate(['/products']);
+  }
 }

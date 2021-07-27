@@ -10,10 +10,15 @@ import { StarComponent } from './shared/star/star.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
+import { ProductDetailGuard } from './products/product-detail/product-detail.guard';
 
 let routes = [
   { path: 'products', component: ProductListComponent },
-  { path: 'product/:id', component: ProductDetailComponent },
+  {
+    path: 'products/:id',
+    component: ProductDetailComponent,
+    canActivate: [ProductDetailGuard],
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' },

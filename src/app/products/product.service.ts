@@ -17,7 +17,7 @@ export class ProductService {
       tap((data) => console.log('All: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
-  }
+  } 
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
@@ -26,7 +26,7 @@ export class ProductService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    
+
     console.log(errorMessage);
     return throwError(errorMessage);
   }
