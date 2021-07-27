@@ -54,11 +54,15 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.listFilter = 'cart';
   }
 
   toggleImage(): void {
     this.showImage = !this.showImage;
+  }
+
+  onRatingClicked(message: string): void {
+    console.log(`From product list - ${message}`);
   }
 }
